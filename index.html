@@ -167,6 +167,17 @@
         transform: translateY(0);
     }
 
+    .date-btn.clicked {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+        opacity: 0.7;
+    }
+
+    .date-btn.clicked:hover {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        box-shadow: 0 2px 8px rgba(107, 114, 128, 0.4);
+    }
+
     @media (max-width: 640px) {
         body {
             padding: 12px;
@@ -337,6 +348,10 @@ function generateButtons() {
         btn.textContent = display;
 
         btn.onclick = function() {
+            // Mark button as clicked
+            this.classList.add("clicked");
+            
+            // Open link in new tab
             window.open(link, "_blank");
         };
 
