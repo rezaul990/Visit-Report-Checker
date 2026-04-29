@@ -79,6 +79,47 @@
         display: inline-block;
     }
 
+    .instructions {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-left: 4px solid #f59e0b;
+        padding: 16px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+    }
+
+    .instructions h3 {
+        color: #92400e;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .instructions h3::before {
+        content: "⚠️";
+        font-size: 18px;
+    }
+
+    .instructions ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #78350f;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .instructions li {
+        margin-bottom: 8px;
+    }
+
+    .instructions strong {
+        color: #92400e;
+        font-weight: 700;
+    }
+
     @keyframes heartbeat {
         0%, 100% { transform: scale(1); }
         25% { transform: scale(1.2); }
@@ -207,6 +248,26 @@
             font-size: 14px;
         }
 
+        .instructions {
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            font-size: 12px;
+            padding-left: 16px;
+            line-height: 1.6;
+        }
+
+        .instructions li {
+            margin-bottom: 6px;
+        }
+
         label {
             font-size: 12px;
             margin-top: 12px;
@@ -287,6 +348,14 @@
     <div class="credit">Developed with <span class="heart">❤</span> by Md Rezaul Karim (BLcian)</div>
     
     <h2>RCM/RSM Visit Report (POS)</h2>
+
+    <div class="instructions">
+        <h3>নির্দেশনা (POS Limitation)</h3>
+        <ul>
+            <li><strong>১।</strong> এক প্লাজায় ২/৩ দিন ভিজিট এন্ট্রি করলে ২য়/৩য় তারিখ শো করবে না। Manually Plaza Search করে দেখতে হবে।</li>
+            <li><strong>২।</strong> দিনের এন্ট্রি দিনে না দিয়ে পরের দিন/পরে দিলে সেটা শো করবে না। Manually Plaza Search করে দেখতে হবে।</li>
+        </ul>
+    </div>
 
     <label>From Date:</label>
     <input type="date" id="fromDate">
