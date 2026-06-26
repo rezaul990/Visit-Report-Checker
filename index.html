@@ -4,120 +4,361 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RCM/RSM Visit Report (POS)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-    * {
+    *, *::before, *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
     }
 
     body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
         min-height: 100vh;
-        padding: 20px;
+        padding: 24px;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
+        color: #1a1a2e;
     }
 
-    .container {
-        background: white;
-        padding: 40px;
-        border-radius: 20px;
-        max-width: 600px;
+    .app-wrapper {
         width: 100%;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        animation: slideIn 0.5s ease-out;
+        max-width: 680px;
+        margin-top: 40px;
     }
 
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateY(-30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    h2 {
-        color: #2d3748;
-        font-size: 28px;
-        font-weight: 700;
-        margin-bottom: 30px;
+    .app-header {
         text-align: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin-bottom: 28px;
+    }
+
+    .app-header .badge {
+        display: inline-block;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(10px);
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.7);
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .app-header h1 {
+        font-size: 28px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.5px;
+        line-height: 1.3;
+    }
+
+    .app-header h1 span {
+        background: linear-gradient(135deg, #a78bfa, #7c3aed);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
     }
 
-    .credit {
-        text-align: center;
-        color: #2d3748;
-        font-size: 15px;
-        font-weight: 700;
-        padding: 16px;
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
-        border-radius: 10px;
-        margin-bottom: 24px;
-        border: 2px solid rgba(102, 126, 234, 0.2);
-        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+    .app-header p {
+        color: rgba(255,255,255,0.5);
+        font-size: 14px;
+        margin-top: 6px;
+        font-weight: 400;
     }
 
-    .credit.bottom {
-        margin-top: 24px;
-        margin-bottom: 0;
-    }
-
-    .credit .heart {
-        color: #e53e3e;
-        font-size: 16px;
-        animation: heartbeat 1.5s ease-in-out infinite;
-        display: inline-block;
+    .card {
+        background: #fff;
+        border-radius: 24px;
+        padding: 36px 40px;
+        box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+        margin-bottom: 20px;
     }
 
     .instructions {
-        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-        border-left: 4px solid #f59e0b;
-        padding: 16px;
-        border-radius: 10px;
-        margin-bottom: 24px;
-        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+        background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        border: 1px solid #fde68a;
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 28px;
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
     }
 
-    .instructions h3 {
-        color: #92400e;
-        font-size: 16px;
+    .instructions .icon {
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    .instructions .content h4 {
+        font-size: 13px;
         font-weight: 700;
-        margin-bottom: 12px;
+        color: #92400e;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .instructions .content p {
+        font-size: 13px;
+        color: #78350f;
+        line-height: 1.6;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input {
+        padding: 12px 14px;
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        font-size: 15px;
+        font-family: inherit;
+        font-weight: 500;
+        color: #1e293b;
+        background: #f8fafc;
+        transition: all 0.2s ease;
+        outline: none;
+        width: 100%;
+        -webkit-appearance: none;
+    }
+
+    .form-group input:focus {
+        border-color: #7c3aed;
+        background: #fff;
+        box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+    }
+
+    .form-group input::placeholder {
+        color: #94a3b8;
+        font-weight: 400;
+    }
+
+    .form-group.full {
+        grid-column: 1 / -1;
+    }
+
+    .btn-generate {
+        width: 100%;
+        padding: 14px 24px;
+        background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
         display: flex;
         align-items: center;
+        justify-content: center;
+        gap: 8px;
+        letter-spacing: 0.3px;
+        margin-top: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-generate:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(124, 58, 237, 0.45);
+    }
+
+    .btn-generate:active {
+        transform: translateY(0);
+    }
+
+    .btn-generate:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-generate .spinner {
+        display: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+    }
+
+    .btn-generate.loading .spinner {
+        display: block;
+    }
+
+    .btn-generate.loading .btn-text {
+        display: none;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .summary-bar {
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        margin-top: 24px;
+        font-size: 13px;
+        color: #475569;
+        font-weight: 500;
+    }
+
+    .summary-bar.visible {
+        display: flex;
+    }
+
+    .summary-bar .count {
+        background: #7c3aed;
+        color: #fff;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 6px;
+    }
+
+    .summary-bar .actions {
+        display: flex;
         gap: 8px;
     }
 
-    .instructions h3::before {
-        content: "⚠️";
-        font-size: 18px;
+    .summary-bar .actions button {
+        padding: 6px 14px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: #fff;
+        font-size: 12px;
+        font-weight: 600;
+        font-family: inherit;
+        color: #475569;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 4px;
     }
 
-    .instructions ul {
-        margin: 0;
-        padding-left: 20px;
-        color: #78350f;
+    .summary-bar .actions button:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+    }
+
+    #output {
+        display: none;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    #output.visible {
+        display: grid;
+    }
+
+    .date-btn {
+        padding: 12px 10px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        background: #fff;
         font-size: 14px;
-        line-height: 1.8;
+        font-weight: 600;
+        font-family: inherit;
+        color: #1e293b;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        position: relative;
     }
 
-    .instructions li {
-        margin-bottom: 8px;
+    .date-btn:hover {
+        border-color: #7c3aed;
+        background: #f5f3ff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
     }
 
-    .instructions strong {
-        color: #92400e;
-        font-weight: 700;
+    .date-btn:active {
+        transform: translateY(0);
+    }
+
+    .date-btn.visited {
+        background: linear-gradient(135deg, #10b981, #059669);
+        border-color: #059669;
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    .date-btn.visited:hover {
+        background: linear-gradient(135deg, #059669, #047857);
+        border-color: #047857;
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .date-btn .check {
+        display: none;
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        width: 20px;
+        height: 20px;
+        background: #10b981;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        font-size: 11px;
+        line-height: 16px;
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .date-btn.visited .check {
+        display: block;
+    }
+
+    .app-footer {
+        text-align: center;
+        padding: 20px 0 10px;
+        font-size: 13px;
+        color: rgba(255,255,255,0.4);
+        font-weight: 500;
+    }
+
+    .app-footer .heart {
+        color: #f43f5e;
+        display: inline-block;
+        animation: heartbeat 1.5s ease-in-out infinite;
     }
 
     @keyframes heartbeat {
@@ -125,252 +366,131 @@
         25% { transform: scale(1.2); }
     }
 
-    label {
-        display: block;
-        color: #4a5568;
-        font-weight: 600;
-        margin-bottom: 8px;
-        margin-top: 16px;
-        font-size: 14px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    input {
-        padding: 14px 16px;
-        width: 100%;
-        border: 2px solid #e2e8f0;
-        border-radius: 10px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        background: #f7fafc;
-    }
-
-    input:focus {
-        outline: none;
-        border-color: #667eea;
-        background: white;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    button {
-        padding: 14px;
-        width: 100%;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    button:not(.date-btn) {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        margin-top: 24px;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    button:not(.date-btn):hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-    }
-
-    button:not(.date-btn):active {
-        transform: translateY(0);
-    }
-
-    #output {
-        margin-top: 30px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 12px;
-    }
-
-    .date-btn {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: white;
-        padding: 12px;
-        margin: 0;
-        box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-        font-size: 14px;
-    }
-
-    .date-btn:hover {
-        background: linear-gradient(135deg, #059669 0%, #047857 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5);
-    }
-
-    .date-btn:active {
-        transform: translateY(0);
-    }
-
-    .date-btn.clicked {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-        box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
-        opacity: 0.7;
-    }
-
-    .date-btn.clicked:hover {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-        box-shadow: 0 2px 8px rgba(107, 114, 128, 0.4);
-    }
-
     @media (max-width: 640px) {
         body {
             padding: 12px;
         }
 
-        .container {
-            padding: 24px 20px;
-        }
-
-        h2 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-
-        .credit {
-            font-size: 13px;
-            padding: 12px;
-            margin-bottom: 16px;
-        }
-
-        .credit.bottom {
+        .app-wrapper {
             margin-top: 16px;
         }
 
-        .credit .heart {
-            font-size: 14px;
+        .app-header h1 {
+            font-size: 22px;
+        }
+
+        .card {
+            padding: 24px 20px;
+            border-radius: 20px;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .form-group input {
+            padding: 11px 12px;
+            font-size: 16px;
         }
 
         .instructions {
-            padding: 12px;
+            padding: 14px;
             margin-bottom: 20px;
         }
 
-        .instructions h3 {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .instructions ul {
+        .instructions .content p {
             font-size: 12px;
-            padding-left: 16px;
-            line-height: 1.6;
         }
 
-        .instructions li {
-            margin-bottom: 6px;
+        .summary-bar {
+            flex-direction: column;
+            gap: 10px;
+            align-items: stretch;
+            text-align: center;
         }
 
-        label {
-            font-size: 12px;
-            margin-top: 12px;
-        }
-
-        input {
-            padding: 12px 14px;
-            font-size: 16px; /* Prevents zoom on iOS */
-        }
-
-        button:not(.date-btn) {
-            padding: 12px;
-            font-size: 14px;
-            margin-top: 20px;
+        .summary-bar .actions {
+            justify-content: center;
         }
 
         #output {
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 8px;
-            margin-top: 20px;
         }
 
         .date-btn {
             padding: 10px 8px;
-            font-size: 12px;
+            font-size: 13px;
         }
     }
 
     @media (max-width: 400px) {
-        .container {
-            padding: 20px 16px;
-        }
-
-        h2 {
-            font-size: 18px;
-        }
-
         #output {
             grid-template-columns: repeat(2, 1fr);
         }
     }
 
-    /* Tablet styles */
     @media (min-width: 641px) and (max-width: 1024px) {
-        .container {
-            max-width: 500px;
-        }
-
-        #output {
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        }
-    }
-
-    /* Landscape mobile */
-    @media (max-height: 600px) and (orientation: landscape) {
-        body {
-            padding: 10px;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        h2 {
-            font-size: 22px;
-            margin-bottom: 16px;
-        }
-
-        label {
-            margin-top: 10px;
+        .app-wrapper {
+            max-width: 560px;
         }
     }
 </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="credit">Developed with <span class="heart">❤</span> by Md Rezaul Karim (BLcian)</div>
-    
-    <h2>RCM/RSM Visit Report (POS)</h2>
-
-    <div class="instructions">
-        <h3>নির্দেশনা (POS Limitation)</h3>
-        <ul>
-            <li><strong>১।</strong> এক প্লাজায় ২/৩ দিন ভিজিট এন্ট্রি করলে ২য়/৩য় তারিখ শো করবে না। Manually Plaza Search করে দেখতে হবে।</li>
-            <li><strong>২।</strong> দিনের এন্ট্রি দিনে না দিয়ে পরের দিন/পরে দিলে সেটা শো করবে না। Manually Plaza Search করে দেখতে হবে।</li>
-        </ul>
+<div class="app-wrapper">
+    <div class="app-header">
+        <div class="badge">POS Tool v2.0</div>
+        <h1><span>RCM/RSM</span> Visit Report</h1>
+        <p>Generate daily visit links for employee attendance tracking</p>
     </div>
 
-    <label>From Date:</label>
-    <input type="date" id="fromDate">
+    <div class="card">
+        <div class="instructions">
+            <div class="icon">&#9888;&#65039;</div>
+            <div class="content">
+                <h4>POS Limitation</h4>
+                <p>এক প্লাজায় ২/৩ দিন ভিজিট এন্ট্রি করলে ২য়/৩য় তারিখ শো করবে না। Manually Plaza Search করে দেখতে হবে। দিনের এন্ট্রি দিনে না দিয়ে পরের দিন/পরে দিলে সেটা শো করবে না। Manually Plaza Search করে দেখতে হবে।</p>
+            </div>
+        </div>
 
-    <label>To Date:</label>
-    <input type="date" id="toDate">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="fromDate">From Date</label>
+                <input type="date" id="fromDate">
+            </div>
+            <div class="form-group">
+                <label for="toDate">To Date</label>
+                <input type="date" id="toDate">
+            </div>
+        </div>
 
-    <label>Employee ID:</label>
-    <input type="text" id="employeeId">
+        <div class="form-group full">
+            <label for="employeeId">Employee ID</label>
+            <input type="text" id="employeeId" placeholder="e.g. BL-01234">
+        </div>
 
-    <button onclick="generateButtons()">Generate</button>
+        <button class="btn-generate" onclick="generateButtons()">
+            <span class="spinner"></span>
+            <span class="btn-text">Generate Visit Links</span>
+        </button>
 
-    <div id="output"></div>
+        <div class="summary-bar" id="summaryBar">
+            <span>Total <span class="count" id="dateCount">0</span> visit dates generated</span>
+            <div class="actions">
+                <button onclick="copyAllLinks()" title="Copy all links to clipboard">Copy All</button>
+                <button onclick="resetAll()" title="Reset visited state">Reset</button>
+            </div>
+        </div>
 
-    <div class="credit bottom">Developed with <span class="heart">❤</span> by Md Rezaul Karim (BLcian)</div>
+        <div id="output"></div>
+    </div>
+
+    <div class="app-footer">
+        Developed with <span class="heart">&hearts;</span> by Md Rezaul Karim (BLcian)
+    </div>
 </div>
 
 <script>
@@ -390,45 +510,124 @@ function displayDate(date) {
     return `${day}.${month}.${year}`;
 }
 
+function setDefaultDates() {
+    let today = new Date();
+    let sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 7);
+    document.getElementById("fromDate").value = sevenDaysAgo.toISOString().split("T")[0];
+    document.getElementById("toDate").value = today.toISOString().split("T")[0];
+}
+
 function generateButtons() {
     let fromDate = document.getElementById("fromDate").value;
     let toDate = document.getElementById("toDate").value;
-    let employeeId = document.getElementById("employeeId").value;
+    let employeeId = document.getElementById("employeeId").value.trim();
     let output = document.getElementById("output");
+    let summaryBar = document.getElementById("summaryBar");
+    let btn = document.querySelector(".btn-generate");
 
     output.innerHTML = "";
+    output.classList.remove("visible");
+    summaryBar.classList.remove("visible");
 
     if (!fromDate || !toDate || !employeeId) {
         alert("Please fill all fields!");
         return;
     }
 
-    let start = new Date(fromDate);
-    let end = new Date(toDate);
-
-    while (start <= end) {
-        let formatted = formatDate(start);
-        let display = displayDate(start);
-
-        let link = `https://pos.waltonbd.com/pos/plazaVisitInfo/list?fromDate=${formatted}&toDate=${formatted}&period=&employeeId=${employeeId}`;
-
-        let btn = document.createElement("button");
-        btn.className = "date-btn";
-        btn.textContent = display;
-
-        btn.onclick = function() {
-            // Mark button as clicked
-            this.classList.add("clicked");
-            
-            // Open link in new tab
-            window.open(link, "_blank");
-        };
-
-        output.appendChild(btn);
-
-        start.setDate(start.getDate() + 1);
+    if (employeeId.length < 2) {
+        alert("Please enter a valid Employee ID!");
+        return;
     }
+
+    btn.classList.add("loading");
+    btn.disabled = true;
+
+    setTimeout(() => {
+        let start = new Date(fromDate);
+        let end = new Date(toDate);
+        let count = 0;
+        let fragment = document.createDocumentFragment();
+
+        while (start <= end) {
+            let formatted = formatDate(start);
+            let display = displayDate(start);
+            let link = `https://pos.waltonbd.com/pos/plazaVisitInfo/list?fromDate=${formatted}&toDate=${formatted}&period=&employeeId=${employeeId}`;
+
+            let btnEl = document.createElement("button");
+            btnEl.className = "date-btn";
+            btnEl.setAttribute("data-date", display);
+            btnEl.textContent = display;
+
+            let check = document.createElement("span");
+            check.className = "check";
+            check.textContent = "\u2713";
+            btnEl.appendChild(check);
+
+            let visitedKey = `visited_${display}`;
+            if (localStorage.getItem(visitedKey) === "true") {
+                btnEl.classList.add("visited");
+            }
+
+            btnEl.addEventListener("click", function (e) {
+                if (e.target === check) return;
+                this.classList.add("visited");
+                localStorage.setItem(`visited_${display}`, "true");
+                window.open(link, "_blank");
+            });
+
+            fragment.appendChild(btnEl);
+            count++;
+            start.setDate(start.getDate() + 1);
+        }
+
+        output.appendChild(fragment);
+        output.classList.add("visible");
+        document.getElementById("dateCount").textContent = count;
+        summaryBar.classList.add("visible");
+
+        btn.classList.remove("loading");
+        btn.disabled = false;
+    }, 200);
 }
+
+function copyAllLinks() {
+    let btns = document.querySelectorAll("#output .date-btn");
+    let links = [];
+    btns.forEach((btn) => {
+        let date = btn.getAttribute("data-date");
+        if (!date) return;
+        let [day, month, year] = date.split(".");
+        if (day && month && year) {
+            let formatted = `${day}%2F${month}%2F${year}`;
+            let employeeId = document.getElementById("employeeId").value.trim();
+            links.push(`https://pos.waltonbd.com/pos/plazaVisitInfo/list?fromDate=${formatted}&toDate=${formatted}&period=&employeeId=${employeeId}`);
+        }
+    });
+
+    if (links.length === 0) return;
+
+    navigator.clipboard.writeText(links.join("\n")).then(() => {
+        let btn = document.querySelector(".summary-bar .actions button");
+        let orig = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(() => btn.textContent = orig, 2000);
+    }).catch(() => {
+        alert("Failed to copy. Please try manually.");
+    });
+}
+
+function resetAll() {
+    if (!confirm("Reset all visited states?")) return;
+    let btns = document.querySelectorAll("#output .date-btn");
+    btns.forEach(btn => {
+        btn.classList.remove("visited");
+        let date = btn.getAttribute("data-date");
+        if (date) localStorage.removeItem(`visited_${date}`);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", setDefaultDates);
 </script>
 
 </body>
